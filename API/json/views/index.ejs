@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taco Recipes</title>
+    <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+  </head>
+
+  <body>
+    <h1>Taco Town 🌮</h1>
+
+    <form action="/recipe" method="POST" class="buttons">
+      <button type="submit" value="chicken" name="choice">🍗</button>
+      <button type="submit" value="beef" name="choice">🥩</button>
+      <button type="submit" value="fish" name="choice">🐟</button>
+    </form>
+    <div id="recipeContainer" class="hidden">
+      <ul>
+        <% if(locals.Recipe){ %>
+        <li>
+          <%= Recipe.ingredients.protein.name %> <%=
+          Recipe.ingredients.protein.preparation %>
+        </li>
+
+        <li><%= Recipe.ingredients.salsa.name %></li>
+        
+      
+        <% for(let i=0;i<Recipe.ingredients.toppings.length; i++){ %>
+
+          <li>
+            <%= Recipe.ingredients.toppings[i].quantity%> <%=
+            Recipe.ingredients.toppings[i].name%>
+          </li>
+  
+         <%  } %>
+        
+        <% } else { %>
+
+        <p>please select the recipe</p>
+
+        <% } %>
+      </ul>
+    </div>
+  </body>
+</html>
