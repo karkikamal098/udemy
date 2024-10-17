@@ -1,0 +1,16 @@
+{
+  "name": "this_currency",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cloudmersive-currency-api-client": "^1.2.0",
+    "ejs": "^3.1.9",
+    "express": "^4.21.1"
+  }
+}
