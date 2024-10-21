@@ -14,8 +14,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
-    select: false, // hide password in response
+    minlength: 8,// hide password in response
   },
 });
 

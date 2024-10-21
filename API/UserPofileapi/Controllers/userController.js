@@ -23,17 +23,16 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const loginUser = async(req, res) => {
+export const loginUser = async (req, res) => {
   try {
-    const { Email, Password } = req.body;
-    console.log(Email, Password);
-    const emailSaved = await User.findOne({ email: newEmail });
+    const Email = req.body.email;
+    const Password = req.body.password;
+    const emailSaved = await User.findOne({ email: Email });
+    console.log(emailSaved);
     if (!emailSaved) {
       return res.status(401).json({ message: "User not found." });
     } else {
       const eMatch = await bcrypt.compare(Password, emailSaved.password);
-      console.log(eMatch);
-
       if (!eMatch) {
         return res.status(401).json({ message: "Invalid password." });
       }
