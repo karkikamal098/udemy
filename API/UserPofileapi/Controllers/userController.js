@@ -1,5 +1,14 @@
 import User from "../Models/userModels.js";
 import bcrypt from "bcrypt";
+import http from "http";
+import Cookies from "cookies";
+import jwt from "jsonwebtoken";
+
+
+const createToken = (_id) =>{
+   return jwt.sign({_id},process.env.SECRET, { expiresIn: '1h' });
+}
+
 
 export const registerUser = async (req, res) => {
   try {
@@ -25,10 +34,12 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
+    const token=createToken(User._id)
+    console.log(token);
+    await res.cookie("jwt", token, {httpOnly: true, maxAge: 3600})
     const Email = req.body.email;
     const Password = req.body.password;
     const emailSaved = await User.findOne({ email: Email });
-    console.log(emailSaved);
     if (!emailSaved) {
       return res.status(401).json({ message: "User not found." });
     } else {
@@ -39,16 +50,21 @@ export const loginUser = async (req, res) => {
 
       res
         .status(200)
-        .json({ message: "user details is correct and is logged in." });
+        .json({user: User._id });
     }
   } catch (error) {
     res.status(500).json(error.message);
   }
 };
 
-export const deleteUser = (req, res) => {
+export const deleteUser = async(req, res) => {
   try {
-    res.json("cc");
+    const deleteId = req.params.id;
+    console.log(deleteId);
+    const UserToDel= await User.deleteOne({_id:deleteId});
+    console.log(UserToDel);
+    res.json(UserToDel);
+
   } catch (error) {
     res.status(500).json(error.message);
   }

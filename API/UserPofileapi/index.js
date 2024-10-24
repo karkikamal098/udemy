@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";    
+import jwt from "jsonwebtoken";
 
 // initialize
 dotenv.config();
@@ -25,13 +26,14 @@ app.use("/api/users", userRoutes);
 
 
 
+
 //connecting to the mongodb server
 // Replace the <connection-string> with your MongoDB connection string.
 mongoose
   .connect(process.env.mongoDB)
   .then(() =>
     app.listen(process.env.PORT, () => {
-      console.log(`Running in the port 3000 ${process.env.PORT}`);
+      console.log(`Running in the port ${process.env.PORT}`);
     })
   )
   .catch((error) => {

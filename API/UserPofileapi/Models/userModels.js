@@ -11,6 +11,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  photo:{
+    type: String,
+    default: "https://via.placeholder.com/150",// default photo url
+  },
   password: {
     type: String,
     required: true,

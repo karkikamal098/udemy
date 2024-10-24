@@ -6,6 +6,6 @@ import {registerUser, loginUser, deleteUser} from "../Controllers/userController
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.delete("/delete", deleteUser);
+router.delete("/delete/:id", deleteUser);
 
 export default router;
